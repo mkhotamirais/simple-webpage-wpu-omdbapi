@@ -1,10 +1,6 @@
-document
-  .getElementById("button-addon2")
-  .addEventListener("click", () => mainSearch());
+document.getElementById("button-addon2").addEventListener("click", () => mainSearch());
 
-document
-  .querySelector(".s-input")
-  .addEventListener("keyup", (e) => e.key == "Enter" && mainSearch());
+document.querySelector(".s-input").addEventListener("keyup", (e) => e.key == "Enter" && mainSearch());
 
 function mainSearch() {
   let key = document.querySelector(".s-input").value;
@@ -14,7 +10,7 @@ function mainSearch() {
 }
 
 function showFetch(key) {
-  fetch(`http://omdbapi.com/?apikey=99773434&s=${key}`)
+  fetch(`http://omdbapi.com/?apikey=99773434&s=${key}`, { mode: "cors", headers: { "Access-Control-Allow-Origin": "*" } })
     .then((res) => res.json())
     .then((res) => show(res));
 }
@@ -37,7 +33,10 @@ const show = (res) => {
 window.addEventListener("click", function (e) {
   const detailId = e.target.dataset.imdbid;
   if (e.target.innerHTML == "Detail") {
-    fetch(`http://omdbapi.com/?apikey=99773434&i=${detailId}`)
+    fetch(`http://omdbapi.com/?apikey=99773434&i=${detailId}`, {
+      mode: "cors",
+      headers: { "Access-Control-Allow-Origin": "*" },
+    })
       .then((res) => res.json())
       .then((res) => showDetail(res));
   }
